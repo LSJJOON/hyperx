@@ -17,18 +17,19 @@ module.exports = function (h, opts) {
   }
 
   return function (strings) {
+	  var agrs = arguments;
 		var state = TEXT, reg = ''
 		if (strings[0] === '' && strings[1] === '') {
-			const view = arguments[1]
-			arguments = [strings]
+			const view = agrs[1]
+			agrs = [strings]
 			strings = [view]
 		}
-    var arglen = arguments.length
+    var arglen = agrs.length
     var parts = []
 
     for (var i = 0; i < strings.length; i++) {
       if (i < arglen - 1) {
-        var arg = arguments[i+1]
+        var arg = agrs[i+1]
         var p = parse(strings[i])
         var xstate = state
         if (xstate === ATTR_VALUE_DQ) xstate = ATTR_VALUE
